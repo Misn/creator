@@ -1,0 +1,7 @@
+class String
+  alias / :split
+end
+
+el_txt = IO.read('elements')
+el = el_txt.split("\n")
+print el[15]

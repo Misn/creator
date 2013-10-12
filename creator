@@ -1,4 +1,7 @@
 class String
+  alias / :split
+end
+class String
   def rr
     if self[-1]=="\n" then return self.chop else return self end
   end
@@ -14,14 +17,6 @@ class String
   end
 end
 
-########ATOMS########
-key = (1..10).to_a
-val = ('a'..'j').to_a
-a_arr = [key,val]
-a_hash = Hash[*a_arr.transpose.flatten]       #TODO read elements as keys, set Atom objects as values
-a_hash.keys.each{|a| a_hash[a]=Exp.new}
-a_hash.values.each{|a| a.set_val(777)}
-a_hash.values.each{|a| a.puts_val}
 
 ########ATOM########
 class Atom
@@ -72,6 +67,19 @@ $h = Atom.new
 $h.def_num
 $h.pp_def('h.pp')
 $h.ecp_ndef('h')
+
+
+########ATOMS########
+el_txt = IO.read('elements')
+key = el_txt.split("\n")
+val = (1..86).to_a
+a_arr = [key,val]
+atoms = Hash[*a_arr.transpose.flatten]       #TODO read elements as keys, set Atom objects as values
+atoms.keys.each{|a| atoms[a]=Atom.new}
+atoms.values.each{|a| a.def_num}
+10.times do atoms['c'].one_more end
+puts atoms['c'].num
+
 
 
 
