@@ -1,0 +1,65 @@
+ $CONTRL SCFTYP=RHF RUNTYP=optimize exetyp=run ICHARG=3
+  COORD=UNIQUE UNITS=ANGS ecp=read dfttyp=b3lyp MAXIT=100 $END
+ $SYSTEM TIMLIM=10000 MWORDS=38 $END
+ $SMP CALL64=.T. $END
+ $p2p p2p=.t. dlb=.t. $end
+ $statpt opttol=1e-5 nstep=1000 $end
+ $GUESS GUESS=huckel $END
+ $scf dirscf=.t. $end
+ $DATA
+ LaH12O6
+C1
+LANTHANUM  57.0      0.696368947        -0.016352275         1.189181553
+OXYGEN      8.0     -1.384084753         0.070385794         2.643881196
+HYDROGEN    1.0      0.373151957        -2.780715618        -0.462926234
+HYDROGEN    1.0      1.036328775         2.741960631         2.848810275
+HYDROGEN    1.0      2.299883573         2.687109159         1.958333901
+HYDROGEN    1.0      2.890672099         0.255984077        -1.174379896
+OXYGEN      8.0     -0.538516287         1.237302692        -0.642844651
+HYDROGEN    1.0      1.986757776        -2.230954847         3.165129852
+OXYGEN      8.0      1.930275019        -1.261977850         3.027031293
+HYDROGEN    1.0     -2.252621778         0.471466336         2.429540827
+HYDROGEN    1.0     -1.502456610        -0.288548160         3.548521787
+HYDROGEN    1.0     -0.592572280         2.206881321        -0.777719543
+OXYGEN      8.0      2.775212596        -0.100184454        -0.268278898
+HYDROGEN    1.0     -1.069844706         0.863269783        -1.377003286
+HYDROGEN    1.0     -0.895977913        -2.726642206         0.419583175
+HYDROGEN    1.0      3.645700507        -0.496990664        -0.053924641
+OXYGEN      8.0     -0.077579675        -2.228903870         0.210514477
+OXYGEN      8.0      1.481534279         2.190899191         2.171102664
+HYDROGEN    1.0      2.459281114        -0.884018151         3.760822283
+ $END
+ $ECP 
+ LA-ECP GEN 46 4
+ 1 -------- G POTENTIAL -------
+ 0.000000 2 1.000000 
+ 2 -------- S-G POTENTIAL ------
+ 91.932177 2 3.309900
+ -3.788764 2 1.655000
+ 2 -------- P-G POTENTIAL ------
+ 63.759486 2 2.836800
+ -0.647958 2 1.418400
+ 2 -------- D-G POTENTIAL ------
+ 36.116173 2 2.021300
+ 0.219114  2 1.010700
+ 1 -------- F-G POTENTIAL ------
+ -68.468426 2 5.883800     
+ O none
+ O none
+ O none
+ O none
+ O none
+ O none
+ H none
+ H none
+ H none
+ H none
+ H none
+ H none
+ H none
+ H none
+ H none
+ H none
+ H none
+ H none
+ &END 

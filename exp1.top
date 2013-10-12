@@ -1,0 +1,8 @@
+ $CONTRL SCFTYP=RHF RUNTYP=optimize exetyp=run ICHARG=3
+  COORD=UNIQUE UNITS=ANGS ecp=read dfttyp=b3lyp MAXIT=100 $END
+ $SYSTEM TIMLIM=10000 MWORDS=38 $END
+ $SMP CALL64=.T. $END
+ $p2p p2p=.t. dlb=.t. $end
+ $statpt opttol=1e-5 nstep=1000 $end
+ $GUESS GUESS=huckel $END
+ $scf dirscf=.t. $end
