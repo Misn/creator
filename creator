@@ -15,8 +15,13 @@ class String
 end
 
 ########ATOMS########
-$atoms = [1..100]
-$atoms.each{|a| a=Atom.new}
+key = (1..10).to_a
+val = ('a'..'j').to_a
+a_arr = [key,val]
+a_hash = Hash[*a_arr.transpose.flatten]       #TODO read elements as keys, set Atom objects as values
+a_hash.keys.each{|a| a_hash[a]=Exp.new}
+a_hash.values.each{|a| a.set_val(777)}
+a_hash.values.each{|a| a.puts_val}
 
 ########ATOM########
 class Atom
