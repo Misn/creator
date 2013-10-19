@@ -241,7 +241,7 @@ HYDROGEN    1.0      2.459281114        -0.884018151         3.760822283
  $ECP
  LA-ECP GEN 46 4
  1 -------- G POTENTIAL -------
- 0.000000 2 1.000000
+ 0.000000 2 1.000000 
  2 -------- S-G POTENTIAL ------
  91.932177 2 3.309900
  -3.788764 2 1.655000
@@ -252,23 +252,23 @@ HYDROGEN    1.0      2.459281114        -0.884018151         3.760822283
  36.116173 2 2.021300
  0.219114  2 1.010700
  1 -------- F-G POTENTIAL ------
- -68.468426 2 5.883800
- O none
- O none
- O none
- O none
- O none
- O none
- H none
- H none
- H none
- H none
- H none
- H none
- H none
- H none
- H none
- H none
- H none
- H none
+ -36.010016 2 4.028600     
+H none
+H none
+H none
+H none
+H none
+H none
+H none
+H none
+H none
+H none
+H none
+H none
+O none
+O none
+O none
+O none
+O none
+O none
  $END

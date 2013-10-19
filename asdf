@@ -1,0 +1,5 @@
+ $GUESS GUESS=huckel $END
+ $scf dirscf=.t. $end
+ $DATA
+ LaH12O6
+C1

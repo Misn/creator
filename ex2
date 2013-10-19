@@ -1,7 +1,40 @@
-class String
-  alias / :split
-end
+#class String
+#  alias / :split
+#end
 
-el_txt = IO.read('elements')
-el = el_txt.split("\n")
-print el[15]
+#el_txt = IO.read('elements')
+#el = el_txt.split("\n")
+#print el[15]
+
+=begin
+#require '/home/misn/ruby/creator/ex2_class'
+require './ex2_class'
+
+class Ex2
+  include Ex_2
+end
+#class Ex_2
+p = Ex2.new
+p.num(7)
+p.sq_p
+=end
+
+=begin
+#str = " $DATA  \n asdfqwe"
+str = IO.read("asdf")
+aa = /^ \$DATA\s+(\S+)/.match(str)
+a = aa[1]
+puts a
+#ela = /([A-Z][a-z]*)([0-9]*)/.match(a)
+#el = ela[0]
+#puts a.size
+#a.slice!(0..el.size-1)
+#list = a.scan(/([A-Z][a-z]*)([0-9]*)/)
+#puts list[2][1]
+=end
+
+a = IO.read("exp1.inp")
+el_list = /^ \$DATA\s+(\S+)/.match(a)[1].scan(/([A-Z][a-z]*)([0-9]*)/)
+el_list.each{|m| m[0].downcase!}
+el_list.each{|m| puts m[0]}
+puts el_list[2][0]
