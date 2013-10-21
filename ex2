@@ -33,8 +33,26 @@ puts a
 #puts list[2][1]
 =end
 
+=begin
 a = IO.read("exp1.inp")
 el_list = /^ \$DATA\s+(\S+)/.match(a)[1].scan(/([A-Z][a-z]*)([0-9]*)/)
 el_list.each{|m| m[0].downcase!}
 el_list.each{|m| puts m[0]}
 puts el_list[2][0]
+=end
+
+=begin
+el_txt = IO.read('names')
+key = el_txt.upcase.split("\n")
+val = ['la','o','h']
+a_arr = [key,val]
+$el_names = Hash[*a_arr.transpose.flatten]
+puts $el_names
+
+#puts 'LANTHANUM '.rstrip+'aa'
+=end
+
+filename = 'exp1'
+a = IO.read("#{filename}.inp")
+el_dlist = /^ \$DATA\s+(\S+)/.match(a)
+puts el_dlist[0].split[1]
