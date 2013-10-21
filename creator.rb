@@ -8,7 +8,7 @@ class String
   def pp_block
     if $el_names.keys.include? self[0..9].rstrip
       #$atoms[$el_names[self[0..9].rstrip]].pp_add;
-      $atoms[$el_names[self[0..9].rstrip]].coord_new($atoms[$el_names[self[0..9].rstrip]].num ,self);
+      $atoms[$el_names[self[0..9].rstrip]].coord_new($atoms[$el_names[self[0..9].rstrip]].num ,self)
       $atoms[$el_names[self[0..9].rstrip]].one_more
     end
   end
@@ -36,7 +36,6 @@ class Compound
     return @symmetry
   end
   def def_consist(input)
-    $a = /^ \$DATA\s+(\S+)/.match(input)
     @consist = /^ \$DATA\s+(\S+)/.match(input)[0].split[1]
   end
   def consist
@@ -67,7 +66,7 @@ class Atom
   def pp_add;  puts @pp;  end                                     #PP puts
   def ecp_def(str);  @ecp = IO.read(str);  end                    #ECP-file def
   def ecp_add;  puts @ecp;  end                                   #ECP puts
-  def data(str)                                                   #Reading data from files
+  def def_data(str)                                                   #Reading data from files
     $atoms[str].pp_def("#{str}.pp")
     $atoms[str].ecp_def("#{str}.ecp")
   end
@@ -78,7 +77,7 @@ end
 class Atoms < Hash
   def first(compound, input)
     self.keys.each{|a| $atoms[a]=Atom.new}
-    compound.element_list.each{|el| $atoms[el].data(el)}
+    compound.element_list.each{|el| $atoms[el].def_data(el)}
     input.each_line{|l| l.pp_block}
   end
 end
