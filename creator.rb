@@ -20,8 +20,6 @@ class Atom
   def initialize;  @num = 0; @coord = ['hi there']; end
   def num;  return @num;  end                                     #Number
   def one_more;  @num += 1;  end                                  #Number increase
-  def el(str);  @el = str;  end                                   #Element name
-  def el_p;  return @el;  end                                     #Return element name
   def coord_new(n, str); @coord[n] = str; end                     #Coord array for each element
   def coord_add(n); puts @coord[n]; end                           #Coord puts
   def coord_a; return @coord; end                                 #Coord array return
@@ -40,12 +38,11 @@ end
 class Atoms < Hash
   def first
     self.keys.each{|a| $atoms[a]=Atom.new}
-    self.keys.each{|a| $atoms[a].el(a)}
   end
 end
 ########ATOMS_END########
 
-######## TOP ########
+########TOP########
 def top_def(str)
   return Proc.new{$top = IO.open("#{str}.top")}
 end
@@ -54,7 +51,7 @@ end
 filename = 'exp1'
 $stdout = File.open("#{filename}_r2.inp", 'w')
 $top = IO.read("#{filename}.top")
-a = IO.read("#{filename}.inp")
+$a = IO.read("#{filename}.inp")
 
 ########EL_NAMES########
 el_txt = IO.read('names')
@@ -79,7 +76,8 @@ el_list = []
 el_dlist.each {|a| el_list.push(a[0])}
 el_list.each{|m| m.downcase!}
 el_list.each{|el| $atoms[el].data(el)}
-a.each_line{|l| l.pp_block}
+
+$a.each_line{|l| l.pp_block}
 
 ########OUT########
 puts $top
