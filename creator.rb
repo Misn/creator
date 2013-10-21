@@ -14,6 +14,46 @@ class String
   end
 end
 
+########COMPOUND#######
+class Compound
+  def initialize(filename)
+    input = IO.read("#{filename}.inp")
+    self.def_top(filename)
+    self.def_symmetry('C1')
+    self.def_consist(input)
+    self.def_element_list(input)
+  end
+  def def_top(input)
+    @top = IO.read("#{input}.top")
+  end
+  def top
+    return @top
+  end
+  def def_symmetry(input)
+    @symmetry = input
+  end
+  def symmetry
+    return @symmetry
+  end
+  def def_consist(input)
+    $a = /^ \$DATA\s+(\S+)/.match(input)
+    @consist = /^ \$DATA\s+(\S+)/.match(input)[0].split[1]
+  end
+  def consist
+    return @consist
+  end
+  def element_list
+    return @element_list
+  end
+  def def_element_list(input)
+    @element_dlist = /^ \$DATA\s+(\S+)/.match(input)[1].scan(/([A-Z][a-z]*)([0-9]*)/)
+    #puts element_list
+    @element_list = []
+    @element_dlist.each {|a| @element_list.push(a[0])}
+    @element_list.each{|m| m.downcase!}
+  end
+end
+########COMPOUND_END#######
 
 ########ATOM########
 class Atom
@@ -27,7 +67,7 @@ class Atom
   def pp_add;  puts @pp;  end                                     #PP puts
   def ecp_def(str);  @ecp = IO.read(str);  end                    #ECP-file def
   def ecp_add;  puts @ecp;  end                                   #ECP puts
-  def data(str)
+  def data(str)                                                   #Reading data from files
     $atoms[str].pp_def("#{str}.pp")
     $atoms[str].ecp_def("#{str}.ecp")
   end
@@ -36,24 +76,33 @@ end
 
 ########ATOMS########
 class Atoms < Hash
-  def first
+  def first(compound, input)
     self.keys.each{|a| $atoms[a]=Atom.new}
+    compound.element_list.each{|el| $atoms[el].data(el)}
+    input.each_line{|l| l.pp_block}
   end
 end
 ########ATOMS_END########
 
-########TOP########
-def top_def(str)
-  return Proc.new{$top = IO.open("#{str}.top")}
+#######INP_FILE_CREATE#######
+def inp_file_create(compound)
+  puts compound.top
+  puts (' $DATA')
+  puts (" #{compound.consist}")
+  puts compound.symmetry
+  compound.element_list.each{|e| $atoms[e].coord_a.each {|c| puts c; $atoms[e].pp_add}}
+  puts (" $END\n $ECP")
+  compound.element_list.each {|a| $atoms[a].num.times {$atoms[a].ecp_add} }
+  puts (' $END')
 end
 
 ########FILES########
 filename = 'exp1'
 $stdout = File.open("#{filename}_r2.inp", 'w')
-$top = IO.read("#{filename}.top")
-$a = IO.read("#{filename}.inp")
+input = IO.read("#{filename}.inp")
+compound = Compound.new(filename)
 
-########EL_NAMES########
+########ELEMENT_NAMES########
 el_txt = IO.read('names')
 key = el_txt.upcase.split("\n")
 val = ['la','o','h']
@@ -66,26 +115,10 @@ key = el_txt.split("\n")
 val = (1..86).to_a
 a_arr = [key,val]
 $atoms = Atoms[*a_arr.transpose.flatten]                          #reading elements as keys, set Atom objects as values
-$atoms.first
 
-########ADD########
-comp = /^ \$DATA\s+(\S+)/.match(a)[0].split[1]
-el_dlist = /^ \$DATA\s+(\S+)/.match(a)[1].scan(/([A-Z][a-z]*)([0-9]*)/)
-#puts el_list
-el_list = []
-el_dlist.each {|a| el_list.push(a[0])}
-el_list.each{|m| m.downcase!}
-el_list.each{|el| $atoms[el].data(el)}
-
-$a.each_line{|l| l.pp_block}
+########ADD_INFORMATION########
+$atoms.first(compound, input)
 
 ########OUT########
-puts $top
-puts (' $DATA')
-puts (" #{comp}")
-puts ('C1')
-el_list.each{|e| $atoms[e].coord_a.each {|c| puts c; $atoms[e].pp_add}}
-puts (" $END\n $ECP")
-el_list.each {|a| $atoms[a].num.times {$atoms[a].ecp_add} }
-puts (' $END')
 
+inp_file_create(compound)
