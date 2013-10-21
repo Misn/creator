@@ -119,6 +119,5 @@ $atoms = Atoms[*a_arr.transpose.flatten]                          #reading eleme
 ########ADD_INFORMATION########
 $atoms.first(compound, input)
 
-########OUT########
-
+########INP_FILE_CREATING########
 inp_file_create(compound)
